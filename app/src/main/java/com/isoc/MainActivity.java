@@ -35,8 +35,8 @@ public class MainActivity extends ActionBarActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Toast.makeText(MainActivity.this, MENU_OPTIONS[position],
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, MENU_OPTIONS[position],
+//                        Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent();
 
