@@ -6,18 +6,22 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/title" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/explanation" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/explanation"
-        android:id="@+id/masjid" />
+        android:id="@+id/gas" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:digits="0123456789"
-        android:layout_below="@+id/masjid"
+        android:layout_below="@+id/gas"
         android:id="@+id/gasInput" />
     <TextView
         android:layout_width="wrap_content"

@@ -47,7 +47,7 @@ public class SadaqatulFitrActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(SadaqatulFitrActivity.this, PaymentInfoActivity.class);
-                        intent.putExtra("from", "fitrPostPayInPerson");
+                        intent.putExtra("from", "fitrPost");
                         intent.putExtra("amount", people.getValue() * 10);
                         startActivity(intent);
                     }

@@ -11,24 +11,27 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BanquetTicketsActivity" />
-        <activity android:name=".EidPrayerInfoActivity" />
-        <activity android:name=".GeneralDonationActivity" />
-        <activity android:name=".JoinACommitteeActivity" />
-        <activity android:name=".PowerOf1000Activity" />
-        <activity android:name=".SadaqatulFitrActivity" />
-        <activity android:name=".SponsorAnIftarActivity" />
-        <activity android:name=".TodayAtISOCActivity" />
-        <activity android:name=".ZakatActivity" />
-        <activity android:name=".PaymentInfoActivity" />
-        <activity android:name=".PersonConfirmationActivity" />
+        <activity android:name=".BanquetTicketsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".EidPrayerInfoActivity" android:screenOrientation="portrait" />
+        <activity android:name=".GeneralDonationActivity" android:screenOrientation="portrait" />
+        <activity android:name=".JoinACommitteeActivity" android:screenOrientation="portrait" />
+        <activity android:name=".PowerOf1000Activity" android:screenOrientation="portrait" />
+        <activity android:name=".SadaqatulFitrActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SponsorAnIftarActivity" android:screenOrientation="portrait" />
+        <activity android:name=".TodayAtISOCActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ZakatActivity" android:screenOrientation="portrait" />
+        <activity android:name=".PaymentInfoActivity" android:screenOrientation="portrait" />
+        <activity android:name=".PersonConfirmationActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SponsorProjectActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SponsorUtilityActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

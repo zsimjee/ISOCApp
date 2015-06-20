@@ -58,6 +58,10 @@ public class PaymentInfoActivity extends Activity {
                                 emailInput.getText().toString(), amount);
                         //TODO: figure out card payments
 
+                        Intent intent = new Intent(PaymentInfoActivity.this, CardConfirmationActivity.class);
+                        intent.putExtra("from", from + "CCPayment");
+                        intent.putExtra("amount", amount);
+                        startActivity(intent);
                     }
                 }
         );
@@ -72,7 +76,8 @@ public class PaymentInfoActivity extends Activity {
                                 emailInput.getText().toString(), amount);
 
                         Intent intent = new Intent(PaymentInfoActivity.this, PersonConfirmationActivity.class);
-                        intent.putExtras(source);
+                        intent.putExtra("from", from + "PayInPerson");
+                        intent.putExtra("amount", amount);
                         startActivity(intent);
                     }
                 }
