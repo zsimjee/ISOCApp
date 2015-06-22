@@ -3,4 +3,15 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="hadith">"The most beloved actions to Allah are continuous ones, even if little..." -Bukhari and Muslim</string>
+    <string name="timetable"><a href="http://www.isocmasjid.org/Pdfs/ramadan_prayertimes_2015.pdf">Timetable</a></string>
+    <string name="programs"><a href="http://www.isocmasjid.org/ramadan/">Programs</a></string>
+    <string name="menu"><a href="http://www.isocmasjid.org/Pdfs/ramadan2015_eventsmenu.pdf">Menu</a></string>
+    <color name="white">#FFFFFF</color>
+    <color name="light_gray">#E0E0E0</color>
+    <color name="dark_gray">#929292</color>
+    <color name="green">#1F6234</color>
+    <color name="light_blue">#3A82B0</color>
+    <color name="black">#000000</color>
+    <string name="title_activity_display_message">DisplayMessageActivity</string>
 </resources>

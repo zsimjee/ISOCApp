@@ -1,14 +1,28 @@
 package com.isoc;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.ActionMode;
+import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by z on 5/20/2015.
@@ -19,6 +33,12 @@ public class BanquetTicketsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_banquet_tickets);
 
+        /*ActionBar actionBar = getSupportActionBar();
+        //actionBar.setTitle("BANQUET TICKETS");
+        actionBar.setDisplayShowCustomEnabled(true);
+        View customView=getLayoutInflater().inflate(R.layout.activity_banquet_tickets, null);
+        actionBar.setCustomView(customView);*/
+
         TextView title 	                = (TextView)findViewById(R.id.title);
         TextView desc                   = (TextView)findViewById(R.id.desc);
         TextView date                   = (TextView)findViewById(R.id.date);
@@ -27,76 +47,153 @@ public class BanquetTicketsActivity extends Activity {
         TextView sched2                 = (TextView)findViewById(R.id.sched2);
         TextView sched3                 = (TextView)findViewById(R.id.sched3);
         TextView sched4                 = (TextView)findViewById(R.id.sched4);
-        final NumberPicker individualInput    = (NumberPicker)findViewById(R.id.individualInput);
-        TextView individual             = (TextView)findViewById(R.id.individual);
-        final NumberPicker tableInput         = (NumberPicker)findViewById(R.id.tableInput);
+        final EditText individualInput    = (EditText)findViewById(R.id.individualInput);
+        final TextView individual             = (TextView)findViewById(R.id.individual);
+        final EditText tableInput         = (EditText)findViewById(R.id.tableInput);
         TextView table                  = (TextView)findViewById(R.id.table);
-        final NumberPicker babysittingInput   = (NumberPicker)findViewById(R.id.babysittingInput);
-        TextView babysitting            = (TextView)findViewById(R.id.babysitting);
+        final EditText babysittingInput   = (EditText)findViewById(R.id.babysittingInput);
+        final TextView babysitting            = (TextView)findViewById(R.id.babysitting);
+        LinearLayout totalContainer     = (LinearLayout)findViewById(R.id.totalContainer);
         final TextView total                  = (TextView)findViewById(R.id.total);
-        Button confirm                  = (Button) findViewById(R.id.confirm);
+        LinearLayout confirm                  = (LinearLayout) findViewById(R.id.confirm);
 
         Querier q = new Querier(this);
 
-        q.textQuery("banquetTitle", title);
-        q.textQuery("banquetDesc", desc);
-        q.textQuery("banquetDate", date);
-        q.textQuery("banquetLoc", loc);
-        q.textQuery("banquetSched1", sched1);
-        q.textQuery("banquetSched2", sched2);
-        q.textQuery("banquetSched3", sched3);
-        q.textQuery("banquetSched4", sched4);
+        q.appendTextQuery("banquetTitle", title);
+        q.appendTextQuery("banquetDesc", desc);
+        q.appendTextQuery("banquetDate", date);
+        q.appendTextQuery("banquetLoc", loc);
+        q.appendTextQuery("banquetSched1", sched1);
+        q.appendTextQuery("banquetSched2", sched2);
+        q.appendTextQuery("banquetSched3", sched3);
+        q.appendTextQuery("banquetSched4", sched4);
 
         individual.setText("$60 Individual Ticket");
         table.setText("$600 Table of 10");
         babysitting.setText("$30 Babysitting (3-12 years)");
 
-        individualInput.setMinValue(0);
-        individualInput.setMaxValue(20);
-        tableInput.setMinValue(0);
-        tableInput.setMaxValue(5);
-        babysittingInput.setMinValue(0);
-        babysittingInput.setMaxValue(20);
+        individualInput.setText("0");
+        tableInput.setText("0");
+        babysittingInput.setText("0");
 
-        confirm.setText("Confirm");
+        WindowManager wm = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x / 2;
+        confirm.setMinimumWidth(width);
+        totalContainer.setMinimumWidth(width);
 
-        total.setText("Total: $0");
+        total.setText("$0");
 
-        NumberPicker.OnValueChangeListener changed = new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                total.setText("Total: $" +
-                        (individualInput.getValue() * 60 + tableInput.getValue() * 600
-                         + babysittingInput.getValue() * 30));
-            }
-        };
+        individualInput.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        individualInput.setOnValueChangedListener(changed);
-        tableInput.setOnValueChangedListener(changed);
-        babysittingInput.setOnValueChangedListener(changed);
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if(individualInput.getText().toString().equals(""))
+                            individualInput.setText("0");
+                        try {
+                            total.setText("$" +
+                                    (Integer.parseInt(individualInput.getText().toString()) * 60
+                                            + Integer.parseInt(tableInput.getText().toString()) * 600
+                                            + Integer.parseInt(babysittingInput.getText().toString()) * 30));
+                        }catch(Exception e){}
+                    }
+                }
+        );
+        tableInput.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if(tableInput.getText().toString().equals(""))
+                            tableInput.setText("0");
+                        try {
+                            total.setText("$" +
+                                    (Integer.parseInt(individualInput.getText().toString()) * 60
+                                            + Integer.parseInt(tableInput.getText().toString()) * 600
+                                            + Integer.parseInt(babysittingInput.getText().toString()) * 30));
+                        }catch(Exception e){}
+                    }
+                }
+        );
+        babysittingInput.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if(babysittingInput.getText().toString().equals(""))
+                            babysittingInput.setText("0");
+
+                        try {
+                            total.setText("$" +
+                                    (Integer.parseInt(individualInput.getText().toString()) * 60
+                                            + Integer.parseInt(tableInput.getText().toString()) * 600
+                                            + Integer.parseInt(babysittingInput.getText().toString()) * 30));
+                        }catch(Exception e){}
+                    }
+                }
+        );
 
         confirm.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(total.getText().toString().trim().equals("Total: $0"))
+                        if (total.getText().toString().trim().equals("$0"))
                             Toast.makeText(getApplicationContext(),
                                     "Please select the amount of tickets you would like to purchase",
                                     Toast.LENGTH_SHORT).show();
                         else {
                             Intent intent = new Intent(BanquetTicketsActivity.this, PaymentInfoActivity.class);
                             intent.putExtra("from", "banquet");
-                            intent.putExtra("notes",
-                                    "individual:" + (individualInput.getValue() * 60) +
-                                    ",table:" + (tableInput.getValue() * 600) +
-                                    ",babysitting:" + (babysittingInput.getValue() * 30));
-                            intent.putExtra("amount", individualInput.getValue() * 60 + tableInput.getValue() * 600 + babysittingInput.getValue() * 30);
+                            try {
+                                intent.putExtra("notes",
+                                        "individual:" + (Integer.parseInt(individualInput.getText().toString()) * 60) +
+                                                ",table:" + (Integer.parseInt(tableInput.getText().toString()) * 600) +
+                                                ",babysitting:" + (Integer.parseInt(babysittingInput.getText().toString()) * 30));
+                            } catch (Exception e) {
+                            }
                             startActivity(intent);
                         }
                     }
                 }
         );
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
 }

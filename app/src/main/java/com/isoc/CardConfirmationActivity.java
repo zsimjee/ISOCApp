@@ -19,7 +19,7 @@ public class CardConfirmationActivity extends Activity {
 
         TextView confirmation = (TextView)findViewById(R.id.confirmation);
 
-        q.textQuery(from, confirmation);
+        q.appendTextQuery(from + "PostCCPayment", confirmation);
 
     }
 

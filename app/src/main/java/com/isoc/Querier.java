@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,7 +33,24 @@ public class Querier {
         rq = Volley.newRequestQueue(c);
     }
 
-    public void textQuery(String id, final TextView tv) {
+    public void makeSimpleRequest(String url) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public String onResponse(String response) {
+                        return "";
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("VOLLEY ERROR:", error.getStackTrace().toString());
+            }
+        });
+// Add the request to the RequestQueue.
+        rq.add(stringRequest);
+    }
+
+    public void appendTextQuery(String id, final TextView tv) {
         String url = "http://www.isocmasjid.org/ramadanapp/v2/querydb.php?id=" + id;
         JSONObject json;
 
@@ -93,6 +111,31 @@ public class Querier {
         };
 
 
+
+        rq.add(request);
+    }
+
+    public void resetTextQuery(String id, final TextView tv) {
+        String url = "http://www.isocmasjid.org/ramadanapp/v2/querydb.php?id=" + id;
+        JSONObject json;
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public String onResponse(JSONArray response) {
+                try {
+                    tv.setText(response.getJSONObject(0).getString("text"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return "";
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("VOLLEY ERROR:", error.getStackTrace().toString());
+            }
+        });
 
         rq.add(request);
     }

@@ -1,77 +1,173 @@
 package com.isoc;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by z on 5/20/2015.
  */
 public class TodayAtISOCActivity extends Activity {
 
+    private Querier q;
+    private ImageButton back, next;
+    private TextView dayView, fastBegins, fastEnds, menu1, menu2, menu3, menu4, tarawih, khatira, tafseer, khateebStatic, khateeb, specialEvents1, specialEvents2;
+    private int day;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_at_isoc);
 
-        TextView fastBegins     = (TextView)findViewById(R.id.fast_begins);
-                fastBegins.setText("Fast begins at ");
-        TextView fastEnds       = (TextView)findViewById(R.id.fast_ends);
-                fastEnds.setText("Fast ends at ");
-        TextView menu1           = (TextView)findViewById(R.id.menu1);
-                menu1.setText("Menu: ");
-        TextView menu2           = (TextView)findViewById(R.id.menu2);
-        TextView menu3           = (TextView)findViewById(R.id.menu3);
-        TextView menu4           = (TextView)findViewById(R.id.menu4);
-        TextView tarawih        = (TextView)findViewById(R.id.tarawih_starts);
-                tarawih.setText("Tarawih starts from ");
-        TextView khatira        = (TextView)findViewById(R.id.khatira);
-            khatira.setText("Khatira after Isha: ");
-        TextView tafseer        = (TextView)findViewById(R.id.tafseer);
-            tafseer.setText("Tafseer after Witr: ");
-        TextView khateeb        = (TextView)findViewById(R.id.khateeb);
-            khateeb.setText("Today's Khutbah will be given by ");
-        TextView specialEvents1  = (TextView)findViewById(R.id.special_events1);
-            specialEvents1.setText("Special events: ");
-        TextView specialEvents2  = (TextView)findViewById(R.id.special_events2);
-        TextView timetable = (TextView)findViewById(R.id.timetable);
-        TextView programs = (TextView)findViewById(R.id.programs);
-        TextView menuLink = (TextView)findViewById(R.id.menuLink);
+        back            = (ImageButton)findViewById(R.id.back);
+        next            = (ImageButton)findViewById(R.id.next);
+        dayView        = (TextView)findViewById(R.id.day);
+        fastBegins     = (TextView)findViewById(R.id.fast_begins);
+        fastEnds       = (TextView)findViewById(R.id.fast_ends);
+        menu1           = (TextView)findViewById(R.id.menu1);
+        menu2           = (TextView)findViewById(R.id.menu2);
+        menu3           = (TextView)findViewById(R.id.menu3);
+        menu4           = (TextView)findViewById(R.id.menu4);
+        tarawih        = (TextView)findViewById(R.id.tarawih_starts);
+        khatira        = (TextView)findViewById(R.id.khatira);
+        tafseer        = (TextView)findViewById(R.id.tafseer);
+        khateeb        = (TextView)findViewById(R.id.khateeb);
+        khateebStatic   = (TextView)findViewById(R.id.khateebStatic);
+        specialEvents1  = (TextView)findViewById(R.id.special_events1);
+        specialEvents2  = (TextView)findViewById(R.id.special_events2);
+        final TextView timetable = (TextView)findViewById(R.id.timetable);
+        final TextView programs = (TextView)findViewById(R.id.programs);
+        final TextView menuLink = (TextView)findViewById(R.id.menuLink);
 
-        Querier q = new Querier(this);
+
+
+
+
+        q = new Querier(this);
 
         RequestQueue rq = Volley.newRequestQueue(this);
-        int day = 1;
-        int week = 1;
+        day = getCurrDay();
+        final Date date = new Date();
 
-        q.textQuery("fastBegins" + day, fastBegins);
-        q.textQuery("fastEnds" + day, fastEnds);
-        q.textQuery("menu" + day + "_line1", menu1);
-        q.textQuery("menu" + day + "_line2", menu2);
-        q.textQuery("menu" + day + "_line3", menu3);
-        q.textQuery("menu" + day + "_line4", menu4);
-        q.textQuery("tarawihStart" + day, tarawih);
-        q.textQuery("khatiraGiver" + day, khatira);
-        q.textQuery("tafseerGiver" + day, tafseer);
-        q.textQuery("khutbahGiver" + week, khateeb);
-        q.textQuery("specialEvents1_" + day, specialEvents1);
-        q.textQuery("specialEvents2_" + day, specialEvents2);
-        q.textQuery("timetableURL", timetable);
-        q.textQuery("programsURL", programs);
-        q.textQuery("menuURL", menuLink);
+        query(q, day, date);
+
+        if(day == 1)
+            back.setVisibility(View.INVISIBLE);
+        if(day == 29)
+            next.setVisibility(View.INVISIBLE);
+
+
+        back.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        day--;
+                        date.setDate(date.getDate() - 1);
+                        if(day == 1)
+                            back.setVisibility(View.INVISIBLE);
+                        next.setVisibility(View.VISIBLE);
+                        query(q, day, date);
+                    }
+                }
+        );
+
+        next.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        day++;
+                        date.setDate(date.getDate() + 1);
+                        if(day == 29)
+                            next.setVisibility(View.INVISIBLE);
+                        back.setVisibility(View.VISIBLE);
+                        query(q, day, date);
+                    }
+                }
+        );
+    }
+
+
+
+    private void query(Querier q, int day, Date date) {
+
+        dayView.setText(parseDay(date.getDay()) + ", " + parseMonth(date.getMonth()) + " " + date.getDate() + " (Day " + day + ")");
+        q.resetTextQuery("fastBegins" + day, fastBegins);
+        q.resetTextQuery("fastEnds" + day, fastEnds);
+        q.resetTextQuery("menu" + day + "_line1", menu1);
+        q.resetTextQuery("menu" + day + "_line2", menu2);
+        q.resetTextQuery("menu" + day + "_line3", menu3);
+        q.resetTextQuery("menu" + day + "_line4", menu4);
+        q.resetTextQuery("tarawihStart" + day, tarawih);
+        q.resetTextQuery("khatiraGiver" + day, khatira);
+        q.resetTextQuery("tafseerGiver" + day, tafseer);
+        if(isFriday(day)) {
+            q.resetTextQuery("khutbahGiver" + getWeek(day), khateeb);
+            khateebStatic.setVisibility(View.VISIBLE);
+            khateeb.setVisibility(View.VISIBLE);
+            khateebStatic.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+            khateeb.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        else {
+            khateebStatic.setHeight(0);
+            khateeb.setHeight(0);
+            khateebStatic.setVisibility(View.INVISIBLE);
+            khateeb.setVisibility(View.INVISIBLE);
+        }
+        q.resetTextQuery("specialEvents1_" + day, specialEvents1);
+        q.resetTextQuery("specialEvents2_" + day, specialEvents2);
+    }
+
+    private int getCurrDay() {
+        Date today = new Date();
+        Date start = new Date();
+        start.setMonth(6);
+        start.setDate(18);
+        return (int)((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 31;
+    }
+    private int getWeek(int day) {
+        if(day < 3)
+            return 1;
+        else if(day < 10)
+            return 2;
+        else if(day < 17)
+            return 3;
+        else if(day < 24)
+            return 4;
+        else
+            return 5;
+    }
+    private boolean isFriday(int day) {
+        return day == 2 || day == 9 || day == 16 || day == 23;
+    }
+    private String parseDay(int day) {
+        String[] days = {
+                "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+        };
+
+        return days[day];
+    }
+    private String parseMonth(int month) {
+        String[] months = {
+                "January", "February", "March","April", "May", "June", "July", "August", "September", "October", "November", "December"
+        };
+
+        return months[month];
     }
 
 }

@@ -2,6 +2,7 @@ package com.isoc;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,31 +44,31 @@ public class MainActivity extends ActionBarActivity {
 
                 switch(position) {
                     case 0:
-                        intent = new Intent(MainActivity.this, BanquetTicketsActivity.class);
-                        break;
-                    case 1:
-                        intent = new Intent(MainActivity.this, JoinACommitteeActivity.class);
-                        break;
-                    case 2:
-                        intent = new Intent(MainActivity.this, EidPrayerInfoActivity.class);
-                        break;
-                    case 3:
-                        intent = new Intent(MainActivity.this, SadaqatulFitrActivity.class);
-                        break;
-                    case 4:
-                        intent = new Intent(MainActivity.this, GeneralDonationActivity.class);
-                        break;
-                    case 5:
-                        intent = new Intent(MainActivity.this, PowerOf1000Activity.class);
-                        break;
-                    case 6:
-                        intent = new Intent(MainActivity.this, SponsorAnIftarActivity.class);
-                        break;
-                    case 7:
                         intent = new Intent(MainActivity.this, TodayAtISOCActivity.class);
                         break;
-                    case 8:
+                    case 1:
+                        intent = new Intent(MainActivity.this, SponsorAnIftarActivity.class);
+                        break;
+                    case 2:
+                        intent = new Intent(MainActivity.this, BanquetTicketsActivity.class);
+                        break;
+                    case 3:
+                        intent = new Intent(MainActivity.this, PowerOf1000Activity.class);
+                        break;
+                    case 4:
+                        intent = new Intent(MainActivity.this, FortyAtFortyActivity.class);
+                        break;
+                    case 5:
                         intent = new Intent(MainActivity.this, ZakatActivity.class);
+                        break;
+                    case 6:
+                        intent = new Intent(MainActivity.this, GeneralDonationActivity.class);
+                        break;
+                    case 7:
+                        intent = new Intent(MainActivity.this, JoinACommitteeActivity.class);
+                        break;
+                    case 8:
+                        intent = new Intent(MainActivity.this, SadaqatulFitrActivity.class);
                         break;
                 }
 
@@ -90,10 +91,6 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

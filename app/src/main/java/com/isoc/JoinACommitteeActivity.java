@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,11 +26,10 @@ public class JoinACommitteeActivity extends Activity {
         TextView newsletter         = (TextView)findViewById(R.id.newsletter);
         final CheckBox checkMember        = (CheckBox)findViewById(R.id.checkMember);
         TextView member             = (TextView)findViewById(R.id.member);
-        Button next                 = (Button)findViewById(R.id.next);
+        LinearLayout next                 = (LinearLayout)findViewById(R.id.next);
 
         newsletter.setText("Sign up for ISOC's email newsletter and community alerts");
         member.setText("Contact me with information on becoming an ISOC Member");
-        next.setText("Continue");
 
         Querier q = new Querier(this);
         final ArrayList<CheckBox> committees = new ArrayList<CheckBox>();
@@ -46,8 +44,8 @@ public class JoinACommitteeActivity extends Activity {
             TextView name = new TextView(this);
             TextView desc = new TextView(this);
 
-            q.textQuery("Committee" + i, name);
-            q.textQuery("CommitteeDesc" + i, desc);
+            q.appendTextQuery("Committee" + i, name);
+            q.appendTextQuery("CommitteeDesc" + i, desc);
 
             committees.add(committee);
 

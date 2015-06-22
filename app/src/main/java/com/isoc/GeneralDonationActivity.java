@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,15 +25,15 @@ public class GeneralDonationActivity extends Activity {
 
         TextView explanation = (TextView) findViewById(R.id.explanation);
         TextView masjid = (TextView) findViewById(R.id.masjid);
-        final EditText masjidInput = (EditText) findViewById(R.id.gasInput);
-        TextView ocs = (TextView) findViewById(R.id.water);
-        final EditText ocsInput = (EditText) findViewById(R.id.waterInput);
-        TextView social = (TextView) findViewById(R.id.trash);
-        final EditText socialInput = (EditText) findViewById(R.id.trashInput);
-        final TextView funeral = (TextView) findViewById(R.id.electricity);
-        final EditText funeralInput = (EditText) findViewById(R.id.electricityInput);
+        final EditText masjidInput = (EditText) findViewById(R.id.masjidInput);
+        TextView ocs = (TextView) findViewById(R.id.ocs);
+        final EditText ocsInput = (EditText) findViewById(R.id.ocsInput);
+        TextView social = (TextView) findViewById(R.id.social);
+        final EditText socialInput = (EditText) findViewById(R.id.socialInput);
+        final TextView funeral = (TextView) findViewById(R.id.funeral);
+        final EditText funeralInput = (EditText) findViewById(R.id.funeralInput);
         final TextView total = (TextView) findViewById(R.id.total);
-        Button confirm = (Button) findViewById(R.id.confirm);
+        LinearLayout confirm = (LinearLayout) findViewById(R.id.confirm);
 
 
         explanation.setText("Support your institution!  There are various areas " +
@@ -47,36 +48,124 @@ public class GeneralDonationActivity extends Activity {
         socialInput.setText("0");
         funeral.setText("Funeral Fund");
         funeralInput.setText("0");
-        total.setText("Total: $0");
-        confirm.setText("Confirm");
+        total.setText("$0");
 
-        TextWatcher tw = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
+        masjidInput.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                try {
-                    int masjidAmt = Integer.parseInt(masjidInput.getText().toString());
-                    int ocsAmt = Integer.parseInt(ocsInput.getText().toString());
-                    int socialAmt = Integer.parseInt(socialInput.getText().toString());
-                    int funeralAmt = Integer.parseInt(funeralInput.getText().toString());
+                    }
 
-                    total.setText("Total: $" + (masjidAmt + ocsAmt + socialAmt + funeralAmt));
-                } catch (Exception e) {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        try {
+                            if (masjidInput.getText().toString().equals(""))
+                                masjidInput.setText("0");
+                            int masjidAmt = Integer.parseInt(masjidInput.getText().toString());
+                            int ocsAmt = Integer.parseInt(ocsInput.getText().toString());
+                            int socialAmt = Integer.parseInt(socialInput.getText().toString());
+                            int funeralAmt = Integer.parseInt(funeralInput.getText().toString());
+
+                            total.setText("$" + (masjidAmt + ocsAmt + socialAmt + funeralAmt));
+                        } catch (Exception e) {
+                        }
+                    }
                 }
-            }
-        };
+        );
+        ocsInput.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        masjidInput.addTextChangedListener(tw);
-        ocsInput.addTextChangedListener(tw);
-        socialInput.addTextChangedListener(tw);
-        funeralInput.addTextChangedListener(tw);
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (ocsInput.getText().toString().equals(""))
+                            ocsInput.setText("0");
+
+                        try {
+                            int masjidAmt = Integer.parseInt(masjidInput.getText().toString());
+                            int ocsAmt = Integer.parseInt(ocsInput.getText().toString());
+                            int socialAmt = Integer.parseInt(socialInput.getText().toString());
+                            int funeralAmt = Integer.parseInt(funeralInput.getText().toString());
+
+                            total.setText("$" + (masjidAmt + ocsAmt + socialAmt + funeralAmt));
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+        );
+        socialInput.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (socialInput.getText().toString().equals(""))
+                            socialInput.setText("0");
+
+                        try {
+                            int masjidAmt = Integer.parseInt(masjidInput.getText().toString());
+                            int ocsAmt = Integer.parseInt(ocsInput.getText().toString());
+                            int socialAmt = Integer.parseInt(socialInput.getText().toString());
+                            int funeralAmt = Integer.parseInt(funeralInput.getText().toString());
+
+                            total.setText("$" + (masjidAmt + ocsAmt + socialAmt + funeralAmt));
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+        );
+        funeralInput.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (funeralInput.getText().toString().equals(""))
+                            funeralInput.setText("0");
+
+                        try {
+                            int masjidAmt = Integer.parseInt(masjidInput.getText().toString());
+                            int ocsAmt = Integer.parseInt(ocsInput.getText().toString());
+                            int socialAmt = Integer.parseInt(socialInput.getText().toString());
+                            int funeralAmt = Integer.parseInt(funeralInput.getText().toString());
+
+                            total.setText("$" + (masjidAmt + ocsAmt + socialAmt + funeralAmt));
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+        );
 
         final Context c = this;
 

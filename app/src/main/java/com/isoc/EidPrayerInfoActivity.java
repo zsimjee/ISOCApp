@@ -4,11 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-
-import org.w3c.dom.Text;
-
 /**
  * Created by z on 5/20/2015.
  */
@@ -30,13 +25,13 @@ public class EidPrayerInfoActivity extends Activity {
         TextView instructions4  = (TextView)findViewById(R.id.instructions4);
 
         Querier q = new Querier(this);
-        q.textQuery("eidTitle", title);
-        q.textQuery("eidDate", date);
-        q.textQuery("eidLoc", location);
-        q.textQuery("eidIntruct1", instructions1);
-        q.textQuery("eidIntruct2", instructions2);
-        q.textQuery("eidIntruct3", instructions3);
-        q.textQuery("eidIntruct4", instructions4);
+        q.appendTextQuery("eidTitle", title);
+        q.appendTextQuery("eidDate", date);
+        q.appendTextQuery("eidLoc", location);
+        q.appendTextQuery("eidIntruct1", instructions1);
+        q.appendTextQuery("eidIntruct2", instructions2);
+        q.appendTextQuery("eidIntruct3", instructions3);
+        q.appendTextQuery("eidIntruct4", instructions4);
     }
 
 }
