@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="MainPage" parent="Theme.AppCompat.Light">
+    <style name="MainPage" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">Helvetica</item>
     </style>
 </resources>

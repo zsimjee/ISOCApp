@@ -1,59 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
-    android:background="@color/light_gray"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="10dp"
-        android:src="@drawable/ico_ramadan1436" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/green"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/green"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Power of 1000"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+
+        <ImageButton
+            android:id="@+id/home"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:background="@color/green"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_home" />
+
+    </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current Number of Sponsors: "
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/sponsors"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/light_blue"
-            android:textSize="22sp" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:background="@color/light_gray"
         android:gravity="center_horizontal"
-        android:text="Help your Masjid reach its goal of 1,000 sponsors pledging $100 or more"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/project"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/white"
-        android:paddingBottom="2dp"
-        android:paddingLeft="-30dp"
-        android:paddingRight="-30dp"
-        android:paddingTop="2dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_sponsorproject" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ico_ramadan1436" />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Number of Sponsors: "
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/sponsors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_blue"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Help your Masjid reach its goal of 1,000 sponsors pledging $100 or more"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/project"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:paddingBottom="2dp"
+            android:paddingLeft="-30dp"
+            android:paddingRight="-30dp"
+            android:paddingTop="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_sponsorproject" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -4,26 +4,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/green"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+
+        <ImageButton
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:scaleType="fitCenter"
+            android:background="@color/green"
+            android:src="@drawable/btn_back"
+            android:layout_marginTop="4dp"
+            android:id="@+id/back"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Banquet Tickets"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            android:gravity="center"/>
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="fitCenter"
+            android:background="@color/green"
+            android:src="@drawable/btn_home"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/home"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="75dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_gray"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:paddingTop="10dp"
-            android:src="@drawable/ico_isoc40" />
-
-
         <LinearLayout
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/ico_isoc40" />
 
             <TextView
                 android:id="@+id/title"
@@ -148,7 +189,7 @@
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

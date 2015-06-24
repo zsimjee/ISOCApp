@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +43,26 @@ public class PaymentInfoActivity extends Activity {
         emailInput = (EditText) findViewById(R.id.emailInput);
         RelativeLayout card = (RelativeLayout) findViewById(R.id.card);
         RelativeLayout person = (RelativeLayout) findViewById(R.id.person);
+        ImageButton back = (ImageButton) findViewById(R.id.back);
+        ImageButton home = (ImageButton) findViewById(R.id.home);
+
+        back.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
+        home.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PaymentInfoActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
 
 
         name.setText("Name");
@@ -120,7 +143,8 @@ public class PaymentInfoActivity extends Activity {
                 "&mo=" + mobile +
                 "&em=" + email;
 
-
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 
     private boolean validate() {
@@ -179,5 +203,13 @@ public class PaymentInfoActivity extends Activity {
         }
 
         return valid;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 }

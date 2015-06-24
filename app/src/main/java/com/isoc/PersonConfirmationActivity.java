@@ -26,5 +26,6 @@ public class PersonConfirmationActivity extends Activity {
     public void onBackPressed(){
         Intent intent = new Intent(PersonConfirmationActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

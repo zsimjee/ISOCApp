@@ -19,6 +19,26 @@ public class PowerOf1000Activity extends Activity {
 
         TextView sponsors       = (TextView)findViewById(R.id.sponsors);
         ImageButton project    = (ImageButton)findViewById(R.id.project);
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageButton home = (ImageButton)findViewById(R.id.home);
+
+        back.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
+        home.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PowerOf1000Activity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
 
 
         Querier q = new Querier(this);

@@ -21,14 +21,10 @@
         </activity>
         <activity
             android:name=".BanquetTicketsActivity"
-            android:label="BANQUET TICKETS"
-            android:screenOrientation="portrait"
-            android:theme="@style/MainPage" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".EidPrayerInfoActivity"
-            android:label="EID PRAYER"
-            android:screenOrientation="portrait"
-            android:theme="@style/MainPage" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".GeneralDonationActivity"
             android:screenOrientation="portrait" />
@@ -63,8 +59,15 @@
             android:name=".FortyAtFortyActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".IftarSlotActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message" >
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".PersonalInformationActivity"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

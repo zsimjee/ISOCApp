@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -23,14 +24,33 @@ public class SponsorProjectActivity extends Activity {
 
         Intent src          = getIntent();
         final String from   = src.getStringExtra("from");
-
-        TextView title      = (TextView)findViewById(R.id.title);
         TextView desc       = (TextView)findViewById(R.id.desc);
         final TextView amount     = (TextView)findViewById(R.id.amount);
         TextView project    = (TextView)findViewById(R.id.project);
         final RadioGroup amounts  = (RadioGroup)findViewById(R.id.amounts);
         final RadioGroup projects = (RadioGroup)findViewById(R.id.projects);
         LinearLayout confirm      = (LinearLayout)findViewById(R.id.confirm);
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageButton home = (ImageButton)findViewById(R.id.home);
+
+        back.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
+        home.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(SponsorProjectActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+
 
         int increment = 0;
 
@@ -39,7 +59,6 @@ public class SponsorProjectActivity extends Activity {
         else if(from.equals("40x40"))
             increment = 2500;
 
-        title.setText("Sponsor a Project or Operational Need");
         desc.setText("Please indicate a total sponsorship amount.  " +
                 "Each increment of $" + String.format("%,d", increment) + " represents the number of " +
                 "sponsors you are committing for.  You can sponsor " +

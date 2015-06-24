@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Zakat"
+            android:text="Sponsor an Iftar"
             android:textColor="@color/white"
             android:textSize="23sp" />
 
@@ -44,64 +45,54 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="75dp"
         android:layout_marginTop="45dp"
-        android:background="@color/light_gray"
-        android:orientation="vertical">
-
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@color/light_gray">
 
         <LinearLayout
+            android:id="@+id/iftar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:paddingBottom="20dp"
-                android:paddingTop="10dp"
-                android:src="@drawable/ico_ramadan1436" />
-
-
             <TextView
+                android:id="@+id/taken"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/zakatDesc"
-                android:textColor="@color/black" />
-
+                android:visibility="invisible" />
             <TextView
-                android:id="@+id/link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_blue"
+                android:textStyle="bold"
+                android:text="Menu"/>
+            <TextView
+                android:id="@+id/menu1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:gravity="center"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
-                android:text="@string/zakatLink" />
+                android:gravity="center_horizontal" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/menu2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal" />
 
-                <TextView
-                    android:id="@+id/amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/menu3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal" />
 
-                <EditText
-                    android:id="@+id/amountInput"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:inputType="numberDecimal"
-                    android:textColor="@color/light_blue" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/menu4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal" />
+
+
         </LinearLayout>
     </ScrollView>
 

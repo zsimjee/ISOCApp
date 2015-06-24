@@ -26,5 +26,6 @@ public class CardConfirmationActivity extends Activity {
     public void onBackPressed(){
         Intent intent = new Intent(CardConfirmationActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

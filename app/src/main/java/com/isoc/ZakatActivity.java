@@ -4,16 +4,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by z on 5/20/2015.
@@ -24,18 +30,46 @@ public class ZakatActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zakat);
 
-
-        TextView explanation        = (TextView)findViewById(R.id.explanation);
+        TextView link               =(TextView)findViewById(R.id.link);
         TextView amount             = (TextView)findViewById(R.id.amount);
         final EditText amountInput  = (EditText)findViewById(R.id.amountInput);
         final TextView total              = (TextView)findViewById(R.id.total);
         LinearLayout confirm          = (LinearLayout)findViewById(R.id.confirm);
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageButton home = (ImageButton)findViewById(R.id.home);
+
+        back.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
+        home.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ZakatActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
 
         total.setText("$0");
         amountInput.setText("0");
 
-        Querier q = new Querier(this);
-        q.appendTextQuery("zakatDesc", explanation);
+        link.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String url = "http://www.zakat.org/donate/zakat-calculator/";
+
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(browserIntent);
+                    }
+                }
+        );
 
         amount.setText("Enter Amount: ");
 
@@ -76,5 +110,12 @@ public class ZakatActivity extends Activity{
 
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
+    }
 
 }

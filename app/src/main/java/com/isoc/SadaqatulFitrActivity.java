@@ -4,13 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +35,27 @@ public class SadaqatulFitrActivity extends Activity {
         TextView peopleText = (TextView) findViewById(R.id.peopleText);
         final TextView total = (TextView) findViewById(R.id.total);
         LinearLayout confirm = (LinearLayout) findViewById(R.id.confirm);
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageButton home = (ImageButton)findViewById(R.id.home);
+
+
+        back.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
+        home.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(SadaqatulFitrActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
 
 
         explanation.setText("Sadaqatul Fitr is $10 per person in the family.\n" +
@@ -80,5 +107,10 @@ public class SadaqatulFitrActivity extends Activity {
                 }
         );
 
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

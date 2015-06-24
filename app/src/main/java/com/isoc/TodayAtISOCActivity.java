@@ -1,24 +1,18 @@
 package com.isoc;
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -27,7 +21,7 @@ import java.util.Date;
 public class TodayAtISOCActivity extends Activity {
 
     private Querier q;
-    private ImageButton back, next;
+    private ImageButton backDay, nextDay;
     private TextView dayView, fastBegins, fastEnds, menu1, menu2, menu3, menu4, tarawih, khatira, tafseer, khateebStatic, khateeb, specialEvents1, specialEvents2;
     private int day;
 
@@ -35,8 +29,8 @@ public class TodayAtISOCActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_at_isoc);
 
-        back            = (ImageButton)findViewById(R.id.back);
-        next            = (ImageButton)findViewById(R.id.next);
+        backDay = (ImageButton)findViewById(R.id.backDay);
+        nextDay = (ImageButton)findViewById(R.id.nextDay);
         dayView        = (TextView)findViewById(R.id.day);
         fastBegins     = (TextView)findViewById(R.id.fast_begins);
         fastEnds       = (TextView)findViewById(R.id.fast_ends);
@@ -54,7 +48,30 @@ public class TodayAtISOCActivity extends Activity {
         final TextView timetable = (TextView)findViewById(R.id.timetable);
         final TextView programs = (TextView)findViewById(R.id.programs);
         final TextView menuLink = (TextView)findViewById(R.id.menuLink);
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageButton home = (ImageButton)findViewById(R.id.home);
 
+        back.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
+        home.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(TodayAtISOCActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+
+        timetable.setOnClickListener(makeUrlClickListener("http://www.isocmasjid.org/Pdfs/ramadan_prayertimes_2015.pdf"));
+        programs.setOnClickListener(makeUrlClickListener("http://www.isocmasjid.org/ramadan/"));
+        menuLink.setOnClickListener(makeUrlClickListener("http://www.isocmasjid.org/Pdfs/ramadan2015_eventsmenu.pdf"));
 
 
 
@@ -68,34 +85,34 @@ public class TodayAtISOCActivity extends Activity {
         query(q, day, date);
 
         if(day == 1)
-            back.setVisibility(View.INVISIBLE);
+            backDay.setVisibility(View.INVISIBLE);
         if(day == 29)
-            next.setVisibility(View.INVISIBLE);
+            nextDay.setVisibility(View.INVISIBLE);
 
 
-        back.setOnClickListener(
+        backDay.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         day--;
                         date.setDate(date.getDate() - 1);
-                        if(day == 1)
-                            back.setVisibility(View.INVISIBLE);
-                        next.setVisibility(View.VISIBLE);
+                        if (day == 1)
+                            backDay.setVisibility(View.INVISIBLE);
+                        nextDay.setVisibility(View.VISIBLE);
                         query(q, day, date);
                     }
                 }
         );
 
-        next.setOnClickListener(
+        nextDay.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         day++;
                         date.setDate(date.getDate() + 1);
-                        if(day == 29)
-                            next.setVisibility(View.INVISIBLE);
-                        back.setVisibility(View.VISIBLE);
+                        if (day == 29)
+                            nextDay.setVisibility(View.INVISIBLE);
+                        backDay.setVisibility(View.VISIBLE);
                         query(q, day, date);
                     }
                 }
@@ -168,6 +185,17 @@ public class TodayAtISOCActivity extends Activity {
         };
 
         return months[month];
+    }
+
+    private View.OnClickListener makeUrlClickListener(final String url) {
+        return new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        };
     }
 
 }
