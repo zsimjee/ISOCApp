@@ -22,8 +22,8 @@ import org.w3c.dom.Text;
  */
 public class PersonalInformationActivity extends Activity{
 
-    private EditText nameInput, addressInput, cityInput, stateInput, zipInput, mobileInput, emailInput;
-    private TextView name, address, city, state, zip, mobile, email;
+    private EditText nameInput, addressInput, cityInput, stateInput, zipInput, mobileInput, emailInput, genderInput, ageInput;
+    private TextView name, address, city, state, zip, mobile, email, gender, age;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +43,10 @@ public class PersonalInformationActivity extends Activity{
         mobileInput  = (EditText)findViewById(R.id.mobileInput);
         email              = (TextView)findViewById(R.id.email);
         emailInput   = (EditText)findViewById(R.id.emailInput);
-        TextView age                = (TextView)findViewById(R.id.age);
-        final EditText ageInput     = (EditText)findViewById(R.id.ageInput);
-        TextView gender             = (TextView)findViewById(R.id.gender);
-        final EditText genderInput  = (EditText)findViewById(R.id.genderInput);
+        age                = (TextView)findViewById(R.id.age);
+        ageInput     = (EditText)findViewById(R.id.ageInput);
+        gender             = (TextView)findViewById(R.id.gender);
+        genderInput  = (EditText)findViewById(R.id.genderInput);
         LinearLayout submit               = (LinearLayout)findViewById(R.id.submit);
         ImageButton back = (ImageButton) findViewById(R.id.back);
         ImageButton home = (ImageButton) findViewById(R.id.home);
@@ -178,6 +178,18 @@ public class PersonalInformationActivity extends Activity{
         }
         else
             email.setTextColor(Color.parseColor("#000000"));
+        if(genderInput.getText().toString().equals("")) {
+            valid = false;
+            gender.setTextColor(Color.parseColor("#FF0000"));
+        }
+        else
+            gender.setTextColor(Color.parseColor("#000000"));
+        if(ageInput.getText().toString().equals("")) {
+            valid = false;
+            age.setTextColor(Color.parseColor("#FF0000"));
+        }
+        else
+            age.setTextColor(Color.parseColor("#000000"));
 
         if(!valid) {
             final Context c = this;

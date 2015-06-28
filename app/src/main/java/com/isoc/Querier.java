@@ -1,7 +1,10 @@
 package com.isoc;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -28,9 +31,47 @@ import java.util.Map;
 public class Querier {
 
     private RequestQueue rq;
+    private Context c;
 
     public Querier(Context c) {
         rq = Volley.newRequestQueue(c);
+        this.c = c;
+    }
+
+    public void makeLink(String id, final View v) {
+
+        final String url = "http://www.isocmasjid.org/ramadanapp/v2/querydb.php?id=" + id;
+        JSONObject json;
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public String onResponse(JSONArray response) {
+                try {
+                    final String gotoURL = response.getJSONObject(0).getString("text");
+                    v.setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(gotoURL));
+                                    c.startActivity(browserIntent);
+                                }
+                            }
+                    );
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return "";
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("VOLLEY ERROR:", error.getStackTrace().toString());
+            }
+        });
+
+        rq.add(request);
     }
 
     public void makeSimpleRequest(String url) {
@@ -80,7 +121,17 @@ public class Querier {
                                final String state, final String zip,
                                final String mobile, final String email,
                                final String age, final String gender) {
-        String url = "http://www.isocmasjid.org/ramadanapp/v2/admin/form3.php";
+        String url = "http://www.isocmasjid.org/ramadanapp/v2/admin/form3.php?" +
+                "committeeName=" + committee +
+                "&name=" + name +
+                "&address=" + address +
+                "&city=" + city +
+                "&state=" + state +
+                "&zipcode=" + zip +
+                "&mobile=" + mobile +
+                "&email=" + email +
+                "&age=" + age +
+                "&gender=" + gender;
 
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -89,31 +140,14 @@ public class Querier {
                         return "";
                     }
                 }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.v("VOLLEY ERROR:", error.getStackTrace().toString());
-                }
-        }) {
-            protected Map<String, String> getPostParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("committeName", committee);
-                params.put("name", name);
-                params.put("address", address);
-                params.put("city", city);
-                params.put("state", state);
-                params.put("zipcode", zip);
-                params.put("mobile", mobile);
-                params.put("email", email);
-                params.put("age", age);
-                params.put("gender", gender);
-                return params;
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("VOLLEY ERROR:", error.getStackTrace().toString());
             }
-        };
+        });
 
-
-
-        rq.add(request);
-    }
+    rq.add(request);
+}
 
     public void resetTextQuery(String id, final TextView tv) {
         String url = "http://www.isocmasjid.org/ramadanapp/v2/querydb.php?id=" + id;

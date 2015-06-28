@@ -120,6 +120,7 @@
                     android:id="@+id/stateInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLength="2"
                     android:textColor="@color/light_blue" />
             </LinearLayout>
 
@@ -194,6 +195,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:digits="1234567890"
+                    android:maxLength="2"
                     android:inputType="numberDecimal"
                     android:textColor="@color/light_blue" />
             </LinearLayout>
@@ -212,10 +214,12 @@
                     android:id="@+id/genderInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLength="1"
                     android:textColor="@color/light_blue" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
@@ -226,12 +230,12 @@
         android:id="@+id/submit">
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Submit"
-                android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Submit"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

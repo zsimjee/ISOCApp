@@ -22,7 +22,7 @@ public class TodayAtISOCActivity extends Activity {
 
     private Querier q;
     private ImageButton backDay, nextDay;
-    private TextView dayView, fastBegins, fastEnds, menu1, menu2, menu3, menu4, tarawih, khatira, tafseer, khateebStatic, khateeb, specialEvents1, specialEvents2;
+    private TextView dayView, fastBegins, fastEnds, menu1, menu2, menu3, menu4, tarawih, khatira, khateebStatic, khateeb, specialEvents1, specialEvents2;
     private int day;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class TodayAtISOCActivity extends Activity {
         menu4           = (TextView)findViewById(R.id.menu4);
         tarawih        = (TextView)findViewById(R.id.tarawih_starts);
         khatira        = (TextView)findViewById(R.id.khatira);
-        tafseer        = (TextView)findViewById(R.id.tafseer);
         khateeb        = (TextView)findViewById(R.id.khateeb);
         khateebStatic   = (TextView)findViewById(R.id.khateebStatic);
         specialEvents1  = (TextView)findViewById(R.id.special_events1);
@@ -69,14 +68,11 @@ public class TodayAtISOCActivity extends Activity {
                 }
         );
 
-        timetable.setOnClickListener(makeUrlClickListener("http://www.isocmasjid.org/Pdfs/ramadan_prayertimes_2015.pdf"));
-        programs.setOnClickListener(makeUrlClickListener("http://www.isocmasjid.org/ramadan/"));
-        menuLink.setOnClickListener(makeUrlClickListener("http://www.isocmasjid.org/Pdfs/ramadan2015_eventsmenu.pdf"));
-
-
-
-
         q = new Querier(this);
+
+        q.makeLink("timetableURL", timetable);
+        q.makeLink("programsURL", programs);
+        q.makeLink("menuURL", menuLink);
 
         RequestQueue rq = Volley.newRequestQueue(this);
         day = getCurrDay();
@@ -132,7 +128,6 @@ public class TodayAtISOCActivity extends Activity {
         q.resetTextQuery("menu" + day + "_line4", menu4);
         q.resetTextQuery("tarawihStart" + day, tarawih);
         q.resetTextQuery("khatiraGiver" + day, khatira);
-        q.resetTextQuery("tafseerGiver" + day, tafseer);
         if(isFriday(day)) {
             q.resetTextQuery("khutbahGiver" + getWeek(day), khateeb);
             khateebStatic.setVisibility(View.VISIBLE);
@@ -153,9 +148,9 @@ public class TodayAtISOCActivity extends Activity {
     private int getCurrDay() {
         Date today = new Date();
         Date start = new Date();
-        start.setMonth(6);
-        start.setDate(18);
-        return (int)((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 31;
+        start.setMonth(5);
+        start.setDate(17);
+        return (int)((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
     }
     private int getWeek(int day) {
         if(day < 3)
@@ -185,17 +180,6 @@ public class TodayAtISOCActivity extends Activity {
         };
 
         return months[month];
-    }
-
-    private View.OnClickListener makeUrlClickListener(final String url) {
-        return new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(browserIntent);
-            }
-        };
     }
 
 }

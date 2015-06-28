@@ -15,17 +15,6 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
-    private final String[] MENU_OPTIONS = {
-            "Banquet Tickets",
-            "Join a Committee",
-            "Eid Prayer Info",
-            "Sadaqatul Fitr",
-            "General Donation",
-            "Power of 1000",
-            "Sponsor an Iftar",
-            "Today at ISOC",
-            "Zakat"};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
                         intent = new Intent(MainActivity.this, SponsorAnIftarActivity.class);
                         break;
                     case 2:
-                        intent = new Intent(MainActivity.this, BanquetTicketsActivity.class);
+                        intent = new Intent(MainActivity.this, EidPrayerInfoActivity.class);
                         break;
                     case 3:
                         intent = new Intent(MainActivity.this, PowerOf1000Activity.class);

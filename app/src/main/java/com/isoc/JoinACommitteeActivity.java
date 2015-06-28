@@ -57,7 +57,7 @@ public class JoinACommitteeActivity extends Activity {
         Querier q = new Querier(this);
         final ArrayList<CheckBox> committees = new ArrayList<CheckBox>();
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 8; i++) {
             LinearLayout parent = new LinearLayout(this);
             parent.setOrientation(LinearLayout.HORIZONTAL);
             LinearLayout textParent = new LinearLayout(this);
@@ -90,7 +90,7 @@ public class JoinACommitteeActivity extends Activity {
                     public void onClick(View v) {
                         String committeeNums = "";
 
-                        for (int i = 1; i <= 10; i++)
+                        for (int i = 1; i <= 8; i++)
                             if (committees.get(i - 1).isChecked())
                                 committeeNums += i + ",";
 

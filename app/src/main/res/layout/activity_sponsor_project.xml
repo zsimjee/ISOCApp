@@ -80,7 +80,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         </RadioGroup>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other: "
+                android:textColor="@color/black"/>
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:maxLength="6"
+                android:inputType="numberDecimal"
+                android:digits="1234567890"
+                android:id="@+id/otherAmount"/>
+        </LinearLayout>
         <TextView
             android:id="@+id/project"
             android:layout_width="match_parent"

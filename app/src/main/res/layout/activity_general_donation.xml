@@ -88,6 +88,7 @@
                             android:id="@+id/masjidInput"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
+                            android:maxLength="5"
                             android:digits="0123456789"
                             android:inputType="numberDecimal" />
 
@@ -134,7 +135,8 @@
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:digits="0123456789"
-                            android:inputType="numberDecimal" />
+                            android:inputType="numberDecimal"
+                            android:maxLength="5"/>
 
                         <ImageView
                             android:layout_width="40dp"
@@ -177,6 +179,7 @@
                         <EditText
                             android:id="@+id/socialInput"
                             android:layout_width="80dp"
+                            android:maxLength="5"
                             android:layout_height="wrap_content"
                             android:digits="0123456789"
                             android:inputType="numberDecimal" />
@@ -224,6 +227,7 @@
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:digits="0123456789"
+                            android:maxLength="5"
                             android:inputType="numberDecimal" />
 
                         <ImageView

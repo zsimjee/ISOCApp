@@ -1,51 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/green"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/green"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Eid Prayer Information"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+
+        <ImageButton
+            android:id="@+id/home"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:background="@color/green"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_home" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/light_gray"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ico_ramadan1436" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textStyle="bold"
             android:id="@+id/title" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
+            android:textSize="14sp"
+            android:textColor="@color/green"
+            android:gravity="center"
             android:id="@+id/date" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/date"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@color/light_blue"
             android:id="@+id/location" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/location"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:id="@+id/time" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/time"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:id="@+id/instructions1" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/instructions1"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:id="@+id/instructions2" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/instructions2"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:id="@+id/instructions3" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/instructions3"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:id="@+id/instructions4" />
-    </RelativeLayout>
-</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

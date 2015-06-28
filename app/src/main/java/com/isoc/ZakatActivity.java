@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -57,7 +58,6 @@ public class ZakatActivity extends Activity{
         );
 
         total.setText("$0");
-        amountInput.setText("0");
 
         link.setOnClickListener(
                 new View.OnClickListener() {
@@ -87,23 +87,31 @@ public class ZakatActivity extends Activity{
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        if(amountInput.getText().toString().equals(""))
-                            amountInput.setText("0");
                         try {
-                            total.setText("$" + amountInput.getText());
-                        } catch(Exception e) {}
+                            total.setText("$" + Integer.parseInt(amountInput.getText().toString()));
+                        } catch (Exception e) {
+                            total.setText("$0");
+                        }
                     }
                 }
         );
+
+        final Context c = this;
 
         confirm.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ZakatActivity.this, PaymentInfoActivity.class);
-                        intent.putExtra("from", "zakat");
-                        intent.putExtra("amount", amountInput.getText().toString());
-                        startActivity(intent);
+                        if (total.getText().toString().equals("$0"))
+                            Toast.makeText(c,
+                                    "Please enter an amount",
+                                    Toast.LENGTH_SHORT).show();
+                        else {
+                            Intent intent = new Intent(ZakatActivity.this, PaymentInfoActivity.class);
+                            intent.putExtra("from", "zakat");
+                            intent.putExtra("amount", Integer.parseInt(amountInput.getText().toString()));
+                            startActivity(intent);
+                        }
                     }
                 }
         );

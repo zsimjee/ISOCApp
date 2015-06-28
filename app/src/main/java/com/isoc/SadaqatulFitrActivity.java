@@ -60,7 +60,6 @@ public class SadaqatulFitrActivity extends Activity {
 
         explanation.setText("Sadaqatul Fitr is $10 per person in the family.\n" +
                 "It should be paid before Eid.");
-        people.setText("1");
         peopleText.setText("Number of people in your family: ");
         total.setText("$" + Integer.parseInt(people.getText().toString()) * 10);
 
