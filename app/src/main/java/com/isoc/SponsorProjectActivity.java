@@ -159,8 +159,13 @@ public class SponsorProjectActivity extends Activity {
             q.appendTextQuery("sponsorProject" + i, rb);
             projects.addView(rb);
         }
+        RadioButton rb = new RadioButton(this);
+        rb.setId(1 * 9);
+        rb.setText("General Operations");
+        projects.addView(rb);
 
-        projects.check(8 * 1);
+
+        projects.check(1 * 9);
     }
 
     private boolean validate() {
