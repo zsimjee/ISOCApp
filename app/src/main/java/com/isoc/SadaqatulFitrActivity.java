@@ -61,7 +61,7 @@ public class SadaqatulFitrActivity extends Activity {
         explanation.setText("Sadaqatul Fitr is $10 per person in the family.\n" +
                 "It should be paid before Eid.");
         peopleText.setText("Number of people in your family: ");
-        total.setText("$" + Integer.parseInt(people.getText().toString()) * 10);
+        total.setText("$0");
 
         people.addTextChangedListener(
                 new TextWatcher() {
@@ -106,10 +106,5 @@ public class SadaqatulFitrActivity extends Activity {
                 }
         );
 
-    }
-
-    public static void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }
