@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -149,23 +150,23 @@ public class TodayAtISOCActivity extends Activity {
         Date today = new Date();
         Date start = new Date();
         start.setMonth(5);
-        start.setDate(17);
+        start.setDate(5);
         return (int)((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
     }
     private int getWeek(int day) {
-        if(day < 3)
+        if(day < 6)
             return 1;
-        else if(day < 10)
+        else if(day < 13)
             return 2;
-        else if(day < 17)
+        else if(day < 20)
             return 3;
-        else if(day < 24)
+        else if(day < 27)
             return 4;
         else
             return 5;
     }
     private boolean isFriday(int day) {
-        return day == 2 || day == 9 || day == 16 || day == 23;
+        return day == 5 || day == 12 || day == 19 || day == 26;
     }
     private String parseDay(int day) {
         String[] days = {

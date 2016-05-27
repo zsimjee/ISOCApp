@@ -65,8 +65,8 @@ public class SponsorAnIftarActivity extends Activity {
         final float scale = this.getResources().getDisplayMetrics().density;
 
         int fiveDp = (int) (5 * scale + 0.5f);
-        int fiftyDp = (int) (50 * scale + 0.5f);;
-        int fifteenDp = (int) (15 * scale + 0.5f);;
+        int fiftyDp = (int) (50 * scale + 0.5f);
+        int fifteenDp = (int) (15 * scale + 0.5f);
 
         int ramadanIndex = 0;
 

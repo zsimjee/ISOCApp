@@ -17,8 +17,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,13 +41,11 @@ public class Querier {
     public void makeLink(String id, final View v) {
 
         final String url = "http://www.isocmasjid.org/ramadanapp/v2/querydb.php?id=" + id;
-        JSONObject json;
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
             @Override
-            public String onResponse(JSONArray response) {
+            public void onResponse(JSONArray response) {
                 try {
                     final String gotoURL = response.getJSONObject(0).getString("text");
                     v.setOnClickListener(
@@ -65,7 +61,6 @@ public class Querier {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                return "";
             }
         }, new Response.ErrorListener() {
             @Override
@@ -81,8 +76,7 @@ public class Querier {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
-                    public String onResponse(String response) {
-                        return "";
+                    public void onResponse(String response) {
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -101,13 +95,12 @@ public class Querier {
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
-            public String onResponse(JSONArray response) {
+            public void onResponse(JSONArray response) {
                 try {
                     tv.setText(tv.getText() + response.getJSONObject(0).getString("text"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                return "";
             }
         }, new Response.ErrorListener() {
             @Override
@@ -117,6 +110,30 @@ public class Querier {
         });
 
         rq.add(request);
+    }
+
+    public String getText(String id) {
+        String url = "http://www.isocmasjid.org/ramadanapp/v2/querydb.php?id=" + id;
+        final String[] result = {""};
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    result[0] = response.getJSONObject(0).getString("text");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("VOLLEY ERROR:", error.getStackTrace().toString());
+            }
+        });
+
+        rq.add(request);
+        return result[0];
     }
 
     public void addToCommittee(final String committee, final String name,
@@ -139,8 +156,7 @@ public class Querier {
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
-                    public String onResponse(String response) {
-                        return "";
+                    public void onResponse(String response) {
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -159,13 +175,12 @@ public class Querier {
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
-            public String onResponse(JSONArray response) {
+            public void onResponse(JSONArray response) {
                 try {
                     tv.setText(response.getJSONObject(0).getString("text"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                return "";
             }
         }, new Response.ErrorListener() {
             @Override
