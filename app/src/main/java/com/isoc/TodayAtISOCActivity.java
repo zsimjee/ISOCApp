@@ -77,13 +77,19 @@ public class TodayAtISOCActivity extends Activity {
 
         RequestQueue rq = Volley.newRequestQueue(this);
         day = getCurrDay();
+
         final Date date = new Date();
 
+        while (day < 1) {
+            day++;
+            date.setDate(date.getDate() + 1);
+        }
         query(q, day, date);
 
-        if(day == 1)
+
+        if(day < 2)
             backDay.setVisibility(View.INVISIBLE);
-        if(day == 29)
+        if(day > 29)
             nextDay.setVisibility(View.INVISIBLE);
 
 
@@ -93,7 +99,7 @@ public class TodayAtISOCActivity extends Activity {
                     public void onClick(View v) {
                         day--;
                         date.setDate(date.getDate() - 1);
-                        if (day == 1)
+                        if (day < 2)
                             backDay.setVisibility(View.INVISIBLE);
                         nextDay.setVisibility(View.VISIBLE);
                         query(q, day, date);
@@ -107,7 +113,7 @@ public class TodayAtISOCActivity extends Activity {
                     public void onClick(View v) {
                         day++;
                         date.setDate(date.getDate() + 1);
-                        if (day == 29)
+                        if (day > 29)
                             nextDay.setVisibility(View.INVISIBLE);
                         backDay.setVisibility(View.VISIBLE);
                         query(q, day, date);
@@ -177,7 +183,7 @@ public class TodayAtISOCActivity extends Activity {
     }
     private String parseMonth(int month) {
         String[] months = {
-                "January", "February", "March","April", "May", "June", "July", "August", "September", "October", "November", "December"
+                "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
         };
 
         return months[month];

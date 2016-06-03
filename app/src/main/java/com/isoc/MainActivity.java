@@ -3,6 +3,7 @@ package com.isoc;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -45,7 +46,8 @@ public class MainActivity extends ActionBarActivity {
                         intent = new Intent(MainActivity.this, PowerOf1000Activity.class);
                         break;
                     case 4:
-                        intent = new Intent(MainActivity.this, FortyAtFortyActivity.class);
+                        //intent = new Intent(MainActivity.this, FortyAtFortyActivity.class);
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/user/ISOCMasjid/"));
                         break;
                     case 5:
                         intent = new Intent(MainActivity.this, ZakatActivity.class);
