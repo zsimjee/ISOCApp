@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RAMADAN 1436 at ISOC"
+            android:text="RAMADAN 1437 at ISOC"
             android:textColor="@color/white"
             android:textSize="23sp"/>
 
@@ -67,10 +67,10 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_ramadan1436" />
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ico_isoc40" />
+                android:src="@drawable/ico_isoc40" />-->
         </LinearLayout>
 
         <GridView

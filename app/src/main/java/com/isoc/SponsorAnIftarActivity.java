@@ -58,15 +58,15 @@ public class SponsorAnIftarActivity extends Activity {
         Querier q = new Querier(this);
 
         d = new Date();
-        d.setDate(14);
-        d.setYear(2015);
+        d.setDate(5);
+        d.setYear(2016);
         d.setMonth(5);
 
         final float scale = this.getResources().getDisplayMetrics().density;
 
         int fiveDp = (int) (5 * scale + 0.5f);
-        int fiftyDp = (int) (50 * scale + 0.5f);;
-        int fifteenDp = (int) (15 * scale + 0.5f);;
+        int fiftyDp = (int) (50 * scale + 0.5f);
+        int fifteenDp = (int) (15 * scale + 0.5f);
 
         int ramadanIndex = 0;
 
@@ -171,14 +171,14 @@ public class SponsorAnIftarActivity extends Activity {
 
     private int getDayOfRamadan(Date d) {
         if(d.getMonth() == 5) {
-            return d.getDate() - 17;
+            return d.getDate() - 5;
         }
         else
-            return d.getDate() + 13;
+            return d.getDate() + 25;
     }
 
     private boolean inRamadan(Date d) {
-        return (d.getMonth() == 5 && d.getDate() > 17) || (d.getMonth() == 6 && d.getDate() < 17);
+        return (d.getMonth() == 5 && d.getDate() > 5) || (d.getMonth() == 6 && d.getDate() < 6);
     }
 
     private TextWatcher makeTextWatcher(final TextView sponsors, final RelativeLayout ir, final int dayNum) {

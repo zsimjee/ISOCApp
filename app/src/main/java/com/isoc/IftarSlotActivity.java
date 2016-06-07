@@ -29,7 +29,7 @@ public class IftarSlotActivity extends Activity {
 
         Intent src = getIntent();
         int day = src.getIntExtra("day", 0);
-        final boolean saturday = (day - 3) % 7 == 0;
+        final boolean saturday = (day - 6) % 7 == 0;
 
 
         final TextView total = (TextView) findViewById(R.id.total);
@@ -175,7 +175,7 @@ public class IftarSlotActivity extends Activity {
     private Date getDate(int day) {
         Date d = new Date();
         d.setMonth(5);
-        d.setDate(17 + day);
+        d.setDate(5 + day);
         return d;
     }
 

@@ -179,7 +179,7 @@ public class BanquetTicketsActivity extends Activity {
                 }
         );
 
-    };
+    }
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
