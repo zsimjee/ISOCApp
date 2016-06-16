@@ -57,7 +57,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="85dp"
-                android:src="@drawable/ico_ramadan1436" />
+                android:src="@drawable/ico_ramadan1437" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

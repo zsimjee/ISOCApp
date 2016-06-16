@@ -63,7 +63,7 @@
                 android:layout_height="120dp"
                 android:paddingBottom="20dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/ico_ramadan1436" />
+                android:src="@drawable/ico_ramadan1437" />
 
 
             <TextView
