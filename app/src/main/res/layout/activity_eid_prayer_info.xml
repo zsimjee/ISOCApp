@@ -56,7 +56,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="10dp"
-            android:src="@drawable/ico_ramadan1436" />
+            android:src="@drawable/ico_ramadan1437" />
 
         <TextView
             android:layout_width="wrap_content"
